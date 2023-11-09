@@ -4,12 +4,16 @@ def symmetric_positive(Matrix,matrix_name="NonGiven Name", vectors = False):
         eigen_values,eigen_vector=np.linalg.eig(Matrix)
         λ = False
 
+        inv_of_a_matrix = np.transpose(Matrix)
+        check_inv = np.allclose(inv_of_a_matrix, Matrix)
+
         def eigen_founder(eigen_values):
             for i in eigen_values:
                 if i > 0:λ = True
                 else:λ = False
 
-            if λ == True:print("\n"+str(matrix_name) +" of matrix is symmetric positive"+"\n")
+            if λ == True and check_inv == True:print("\n"+str(matrix_name) +" of matrix is symmetric positive"+"\n")
+            elif λ == True and check_inv == False:print("\n"+str(matrix_name) +" of matrix is only positive"+"\n")
             else:print(str(matrix_name) + " of matrix is not symmetric positive"+"\n")
 
         if vectors == True:eigen_founder(eigen_values),print("\n"+"Eigen Vector of "+
@@ -18,6 +22,7 @@ def symmetric_positive(Matrix,matrix_name="NonGiven Name", vectors = False):
         else:eigen_founder(eigen_values)
     except:
         print("This is the error message: Check the given parameters and Library")
+        
 def largest_value(Matrix,matrix_name="NonGiven Name",matrix_columns=3):
     try:
         identity_matrix = np.identity(matrix_columns)
